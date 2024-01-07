@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import moment from 'moment';
 
-function DateTime(props) {
+interface DateTimeProps {
+  date: string;
+}
+
+function DateTime(props: DateTimeProps) {
   return (
     <p className="date">{props.date}</p>
   )
-}
-
-interface DateTimeProps {
-  date: string;
 }
 
 const withPrettyDate = <P extends DateTimeProps>(Component: React.ComponentType<P>) => {
@@ -38,7 +38,12 @@ const withPrettyDate = <P extends DateTimeProps>(Component: React.ComponentType<
 
 const DateTimePretty = withPrettyDate(DateTime);
 
-function Video(props) {
+interface VideoProps {
+  url: string;
+  date: string;
+}
+
+function Video(props: VideoProps) {
   return (
     <div className="video">
       <iframe src={props.url} frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen></iframe>
@@ -47,7 +52,11 @@ function Video(props) {
   )
 }
 
-function VideoList(props) {
+interface VideoListProps {
+  list: VideoProps[];
+}
+
+function VideoList(props: VideoListProps) {
   return props.list.map((item, index) => (
     <Video key={index} url={item.url} date={item.date} />
   ));
